@@ -1,0 +1,24 @@
+name = "cloud-mail-points"
+main = "src/index.js"
+compatibility_date = "2024-11-06"
+
+# ---------------------------------------------------------------- 配置
+# MAIL_API 就是你的云邮后端地址（和 App 里的服务器地址是同一个）。
+# 其余数字按需改：签到给多少分、建一个邮箱扣多少分、按哪个时区算「今天」。
+[vars]
+MAIL_API = "https://mail.915161.xyz"
+CHECKIN_POINTS = "5"
+CREATE_ACCOUNT_COST = "5"
+TZ_OFFSET_MINUTES = "480"
+
+# ---------------------------------------------------------------- 存储
+# 先跑：npx wrangler d1 create cloud-mail-points
+# 然后把输出的 database_id 填到这里。
+[[d1_databases]]
+binding = "DB"
+database_name = "cloud-mail-points"
+database_id = "在这里填入 wrangler d1 create 输出的 database_id"
+
+# 可选：管理员手动加减积分用的密钥（不配就只有签到和扣分，没有管理员接口）
+# 用 npx wrangler secret put ADMIN_KEY 来设置，不要写在这里。
+# ADMIN_KEY = ""
